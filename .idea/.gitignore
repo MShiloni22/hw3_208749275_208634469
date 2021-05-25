@@ -2,7 +2,11 @@
 /shelf/
 /workspace.xml
 # Datasource local storage ignored files
+<<<<<<< HEAD
+/dataSources/
+=======
 /../../../../../../:\Users\Tal Shalom\PycharmProjects\hw3_208749275_208634469\.idea/dataSources/
+>>>>>>> origin/master
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
