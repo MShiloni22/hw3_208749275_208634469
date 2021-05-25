@@ -17,6 +17,7 @@ class Cluster:
         id_list = []
         labels = {'B - CELL_ALL': 0, 'B - CELL_ALL_TCF3 - PBX1': 0, 'B - CELL_ALL_HYPERDIP': 0, 'B - CELL_ALL_HYPO': 0,
                   'B - CELL_ALL_MLL': 0, 'B - CELL_ALL_T - ALL': 0, 'B - CELL_ALL_ETV6 - RUNX1': 0}
+        ## אולי צריך "" במקום ''
         for s in self.samples:
             labels[s.label] += 1
             id_list.append(s.s_id)
