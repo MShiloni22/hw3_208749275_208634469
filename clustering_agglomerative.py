@@ -5,3 +5,4 @@ class AgglomerativeClustering:
         self.samples = samples
 
     def compute_silhoeutte(self):
+        return
