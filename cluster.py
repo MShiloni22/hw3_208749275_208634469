@@ -1,4 +1,4 @@
-
+from sample import Sample
 
 class Cluster:
     def __init__(self, c_id, samples):
@@ -10,6 +10,17 @@ class Cluster:
         self.samples.append(other.samples)
         self.samples.sort(key=lambda x: x.s_id)
         del other
+
+    def compute_in(self, s_sample, distance_list):
+        in_val =0
+        for s in self.samples:
+            if s!=s_sample:
+                in_val=in_val+ distance_list[(s_sample, s)]
+        if len(self.samples)==1:
+                return 0
+        else:
+            return in_val / (len(self.samples)-1)
+
 
     def print_details(self, silhouette):
         count = 0
