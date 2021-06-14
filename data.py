@@ -1,5 +1,6 @@
 import pandas
 import sample
+from sample import Sample
 
 
 # define Data class
@@ -27,3 +28,12 @@ class Data:
                     genes_list.append(self.data[j][i])
             new_sample = sample.Sample(self.data["samples"][i], genes_list, self.data["type"][i])
             samples.append(new_sample)
+        return samples
+
+    def create_distance_matrix(self):
+        samples_list = self.create_samples()
+        distance_matrix = {}
+        for i in samples_list:
+            for j in samples_list:
+                distance_matrix[(i.s_id, j.s_id)] = Sample.compute_euclidean_distance(i, j)
+        return distance_matrix
