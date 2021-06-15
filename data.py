@@ -22,7 +22,7 @@ class Data:
         samples = []
         genes_list = []
         keys_list = self.data.keys()
-        for i in self.data["samples"]:
+        for i in range(self.data["samples"]):
             for j in keys_list:
                 if j != "samples" and j != "type":
                     genes_list.append(self.data[j][i])
