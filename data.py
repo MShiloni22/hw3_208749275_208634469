@@ -42,5 +42,5 @@ class Data:
             for j in samples_list:
                 if i == j:
                     continue
-                distance_matrix[(i.s_id, j.s_id)] = Sample.compute_euclidean_distance(i, j)
+                distance_matrix[(i.s_id, j.s_id)] = i.compute_euclidean_distance(j)
         return distance_matrix
