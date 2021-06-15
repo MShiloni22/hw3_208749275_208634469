@@ -32,6 +32,7 @@ class AgglomerativeClustering:
                     if c1 != c:
                         out_val.append(c1.compute_in(s, distance_list))
                 out = min(out_val)
+                out_val.clear()
                 if out == 0 and in_val == 0:
                     silhoeutte_samples[s.s_id] = 0
                     continue
