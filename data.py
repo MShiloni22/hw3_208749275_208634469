@@ -20,15 +20,14 @@ class Data:
         :return: a list of all the samples
         """
         samples = []
-        genes_list = []
         keys_list = self.data.keys()
         for i in range(len(self.data["samples"])):
+            genes_list = []
             for j in keys_list:
                 if j != "samples" and j != "type":
                     genes_list.append(self.data[j][i])
             new_sample = sample.Sample(self.data["samples"][i], genes_list, self.data["type"][i])
             samples.append(new_sample)
-            genes_list.clear()
         return samples
 
     def create_distance_matrix(self, samples_list):
