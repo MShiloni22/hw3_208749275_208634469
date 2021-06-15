@@ -30,8 +30,10 @@ class Cluster:
                 in_val = in_val + distance_list[(s_sample.s_id, s.s_id)]
         if len(self.samples) == 1:
             return 0
-        else:
+        if s_sample in self.samples:
             return in_val / (len(self.samples)-1)
+        else:
+            return in_val / (len(self.samples))
 
     def print_details(self, silhouette):
         """
