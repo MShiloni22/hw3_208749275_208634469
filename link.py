@@ -1,6 +1,3 @@
-from sample import Sample
-
-
 class Link:
     def compute(self, cluster, other, distance_list):
         # Abstract method, defined by convention only
@@ -16,7 +13,7 @@ class SingleLink(Link):
         :param distance_list: dictionary of all distances
         :return: the distance between the clusters, according to single link method
         """
-        minimum_distance = Sample.compute_euclidean_distance(cluster.samples[0], other.samples[0])
+        minimum_distance = cluster.samples[0].compute_euclidean_distance(other.samples[0])
         for point_from_cluster in cluster.samples:
             for point_from_other in other.samples:
                 distance = distance_list[(point_from_cluster.s_id, point_from_other.s_id)]
@@ -34,7 +31,7 @@ class CompleteLink(Link):
                 :param distance_list: dictionary of all distances
                 :return: the distance between the clusters, according to single link method
                 """
-        maximum_distance = Sample.compute_euclidean_distance(cluster.samples[0], other.samples[0])
+        maximum_distance = cluster.samples[0].compute_euclidean_distance(other.samples[0])
         for point_from_cluster in cluster.samples:
             for point_from_other in other.samples:
                 distance = distance_list[(point_from_cluster.s_id, point_from_other.s_id)]
