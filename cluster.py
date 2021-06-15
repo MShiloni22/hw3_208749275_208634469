@@ -9,7 +9,7 @@ class Cluster:
         self.c_id = min(self.c_id, other.c_id)
         self.samples.append(other.samples)
         self.samples.sort(key=lambda x: x.s_id)
-        del other
+
 
     def compute_in(self, s_sample, distance_list):
         in_val =0

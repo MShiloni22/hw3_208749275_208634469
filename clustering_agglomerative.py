@@ -1,10 +1,11 @@
-from sample import Sample
-from cluster import Cluster
 
+from cluster import Cluster
+from sample import Sample
 
 class AgglomerativeClustering:
     def __init__(self, link, samples):
         self.link = link
+        self.samples = samples
         self.clusters = []
         j = 0
         for i in samples:
@@ -22,7 +23,7 @@ class AgglomerativeClustering:
                     if c1!=c:
                         out_val.append(c1.compute_in(s, distance_list))
                 out = min(out_val)
-                silhoeutte_samples[s.s_id] = out-in_val/max(out,in_val)
+                silhoeutte_samples[s.s_id] = round(out-in_val/max(out,in_val),3)
                 out_val = []
         return silhoeutte_samples
 
@@ -37,8 +38,66 @@ class AgglomerativeClustering:
                 if len(cluster.samples)<=1:
                     summery_silhoeutte[cluster.c_id]=0
                 else:
-                    summery_silhoeutte[cluster.c_id] = round(sum_sil/len(cluster.samples))
+                    summery_silhoeutte[cluster.c_id] = round(sum_sil/len(cluster.samples),3)
+        summery_silhoeutte[0] = silhoeutte_dict
         return summery_silhoeutte
+
+
+    def compute_rand_index(self):
+        tp=0
+        fp=0
+        for c in self.clusters:
+            for s1 in c.samples:
+                for s2 in c.samples:
+                    if(s1.s_id==s2.s_id):
+                        continue
+                    if (s1.lable == s2.lable):
+                        tp = tp+1
+                    else:
+                        fp = fp+1
+        tn=0
+        fn=0
+        for c1 in self.clusters:
+            for s1 in c1.samples:
+                for c2 in self.clusters:
+                    if(c1.c_id==c2.c_id):
+                        continue
+                    for s2 in c2.samples:
+                    if(s1.lable == s2.lable)
+                        fn = fn+1
+                    else:
+                        tn = tn+1
+        ri = (tp+tn)/(tp+tn+fp+fn)
+        return ri
+
+
+
+
+    def run(self, max_clusters, distance_list):
+        while len(self.clusters)>max_clusters:
+            min= self.link.compute(self.clusters[0], self.clusters[1], distance_list)
+            list_names_clusters = [self.clusters[0],self.clusters[1]]
+            for c1 in self.clusters:
+                for c2 in self.clusters:
+                    if (c1.c_id!=c2.c_id):
+                        distance = self.link.compute(c1, c2, distance_list)
+                        if (distance<min):
+                            min = distance
+                            list_names_clusters[0] = c1
+                            list_names_clusters[1] = c2
+
+            list_names_clusters[0].merge(list_names_clusters[1])
+            self.clusters.remove(list_names_clusters[1])
+        final_clusters = self.compute_summery_silhoeutte(distance_list)
+        for i in self.clusters:
+            i.print_details(final_clusters[i.c_id])
+        total_silhoeutte = sum(final_clusters[0].values())/len(final_clusters[0])
+        print("Whole data: silhouette = ", total_silhoeutte,", RI = ", self.compute_rand_index)
+
+
+
+
+
 
 
 
