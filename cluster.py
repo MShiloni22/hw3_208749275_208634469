@@ -32,9 +32,8 @@ class Cluster:
             if len(self.samples) == 1:
                 return 0
             return in_val / (len(self.samples)-1)
-        if len(self.samples) == 1:
-            return 0
-        return in_val / (len(self.samples))
+        else:
+            return in_val / (len(self.samples))
 
     def print_details(self, silhouette):
         """

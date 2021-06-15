@@ -113,6 +113,8 @@ class AgglomerativeClustering:
         final = final_clusters[0]
         sum1 = 0
         for v in final.values():
+            if v == 1:
+                continue
             sum1 = sum1 + v
         length = len(final.values())
         total_silhoeutte = sum1/length
