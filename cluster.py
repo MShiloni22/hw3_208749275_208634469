@@ -58,5 +58,5 @@ class Cluster:
                     count = labels[i]
                     dominant_label = i
 
-        print("Cluster", self.c_id, ": ", id_list, ", dominant label = ", dominant_label, ", silhouette = ", silhouette,
+        print("Cluster ", self.c_id, ": ", id_list, ", dominant label = ", dominant_label, ", silhouette = ", silhouette,
               sep='')
