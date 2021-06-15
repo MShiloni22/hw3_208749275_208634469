@@ -1,14 +1,29 @@
 class Cluster:
     def __init__(self, c_id, samples):
+        """
+        build a new Cluster instance
+        :param c_id: cluster's name, in the beginning it's the sample's id
+        :param samples: list of samples which are in the cluster
+        """
         self.c_id = c_id
         self.samples = samples
 
     def merge(self, other):
+        """
+        merges two clusters, gives the minimum name
+        :param other: a second cluster to be merged with the current (self) cluster
+        """
         self.c_id = min(self.c_id, other.c_id)
         self.samples.append(other.samples)
         self.samples.sort(key=lambda x: x.s_id)
 
     def compute_in(self, s_sample, distance_list):
+        """
+        computes the average distance between a sample and the samples in a given cluster
+        :param s_sample: a specific cluster
+        :param distance_list: a similarity matrix
+        :return: average distance between a sample and the samples in a given cluster
+        """
         in_val = 0
         for s in self.samples:
             if s != s_sample:
@@ -19,6 +34,10 @@ class Cluster:
             return in_val / (len(self.samples)-1)
 
     def print_details(self, silhouette):
+        """
+        prints the details for each cluster
+        :param silhouette: the silhouette of the cluster
+        """
         count = 0
         dominant_label = ""
         id_list = []

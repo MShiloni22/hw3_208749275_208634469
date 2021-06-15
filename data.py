@@ -31,6 +31,10 @@ class Data:
         return samples
 
     def create_distance_matrix(self):
+        """
+        creates a similarity matrix for all the samples
+        :return: a similarity matrix
+        """
         samples_list = self.create_samples()
         distance_matrix = {}
         for i in samples_list:

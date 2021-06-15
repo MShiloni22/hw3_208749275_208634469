@@ -3,6 +3,11 @@ from cluster import Cluster
 
 class AgglomerativeClustering:
     def __init__(self, link, samples):
+        """
+        build a new AgglomerativeClustering instance
+        :param link: a linkage method - single/complete
+        :param samples: list of samples
+        """
         self.link = link
         self.samples = samples
         self.clusters = []
@@ -12,6 +17,11 @@ class AgglomerativeClustering:
             j = j+1
 
     def compute_silhoeutte(self, distance_list):
+        """
+        computes the silhouette of a point
+        :param distance_list: a similarity matrix
+        :return: a dictionary of all samples' silhouettes
+        """
         silhoeutte_samples = {}
         out_val = []
         for c in self.clusters:
@@ -26,6 +36,11 @@ class AgglomerativeClustering:
         return silhoeutte_samples
 
     def compute_summery_silhoeutte(self, distance_list):
+        """
+        computes a silhouette for clusters
+        :param distance_list: a similarity matrix
+        :return: a dictionary, holds silhouette per cluster
+        """
         silhoeutte_dict = self.compute_silhoeutte(distance_list)
         summery_silhoeutte = {}
         for cluster in self.clusters:
@@ -40,6 +55,10 @@ class AgglomerativeClustering:
         return summery_silhoeutte
 
     def compute_rand_index(self):
+        """
+        computes the rand index of the clustering algorithm
+        :return: the rand index of the clustering algorithm
+        """
         tp = 0
         fp = 0
         for c in self.clusters:
@@ -67,6 +86,11 @@ class AgglomerativeClustering:
         return ri
 
     def run(self, max_clusters, distance_list):
+        """
+        runs the clustering algorithm, given a specific linkage method and prints the results
+        :param max_clusters: number of final clusters number
+        :param distance_list: a similarity matrix
+        """
         while len(self.clusters) > max_clusters:
             min_distance = self.link.compute(self.clusters[0], self.clusters[1], distance_list)
             list_names_clusters = [self.clusters[0], self.clusters[1]]

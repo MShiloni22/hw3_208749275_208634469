@@ -1,6 +1,12 @@
 # define class sample
 class Sample:
     def __init__(self, s_id, genes, label):
+        """
+        builds a Sample instance
+        :param s_id: sample's name, from the column 'sample'
+        :param genes: list of genes for the sample
+        :param label: sample's label
+        """
         self.s_id = s_id
         self.genes = genes
         self.label = label
