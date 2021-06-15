@@ -36,7 +36,7 @@ class AgglomerativeClustering:
                 if out == 0 and in_val == 0:
                     silhoeutte_samples[s.s_id] = 0
                     continue
-                silhoeutte_samples[s.s_id] = round(out-in_val/max(out, in_val), 3)
+                silhoeutte_samples[s.s_id] = round((out-in_val)/max(out, in_val), 3)
         return silhoeutte_samples
 
     def compute_summery_silhoeutte(self, distance_list):
