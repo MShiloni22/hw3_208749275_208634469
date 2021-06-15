@@ -31,12 +31,11 @@ class Data:
             genes_list.clear()
         return samples
 
-    def create_distance_matrix(self):
+    def create_distance_matrix(self, samples_list):
         """
         creates a similarity matrix for all the samples
         :return: a similarity matrix
         """
-        samples_list = self.create_samples()
         distance_matrix = {}
         for i in samples_list:
             for j in samples_list:

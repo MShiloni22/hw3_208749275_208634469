@@ -7,7 +7,7 @@ import clustering_agglomerative
 def main(argv):
     data_dict = data.Data(argv[1])
     samples_list = data_dict.create_samples()
-    distance_list = data_dict.create_distance_matrix()
+    distance_list = data_dict.create_distance_matrix(samples_list)
     max_clusters = 7
 
     print("single link:")
