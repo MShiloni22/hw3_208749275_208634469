@@ -19,7 +19,7 @@ class Sample:
         """
         distance = 0
         squared_components_distance_sum = 0
-        for i in self.genes:
+        for i in range(len(self.genes)):
             squared_components_distance_sum += (self.genes[i] - other.genes[i])**2
         distance += squared_components_distance_sum**0.5
         return distance
