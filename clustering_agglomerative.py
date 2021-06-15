@@ -13,7 +13,8 @@ class AgglomerativeClustering:
         self.clusters = []
         j = 0
         for i in samples:
-            self.clusters.append(Cluster(j, i))
+            samples_list = [i]
+            self.clusters.append(Cluster(j, samples_list))
             j = j+1
 
     def compute_silhoeutte(self, distance_list):
