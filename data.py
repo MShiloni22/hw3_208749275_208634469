@@ -28,6 +28,7 @@ class Data:
                     genes_list.append(self.data[j][i])
             new_sample = sample.Sample(self.data["samples"][i], genes_list, self.data["type"][i])
             samples.append(new_sample)
+            genes_list.clear()
         return samples
 
     def create_distance_matrix(self):
