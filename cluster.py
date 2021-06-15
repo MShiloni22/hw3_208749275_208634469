@@ -1,5 +1,3 @@
-from sample import Sample
-
 class Cluster:
     def __init__(self, c_id, samples):
         self.c_id = c_id
@@ -10,17 +8,15 @@ class Cluster:
         self.samples.append(other.samples)
         self.samples.sort(key=lambda x: x.s_id)
 
-
     def compute_in(self, s_sample, distance_list):
-        in_val =0
+        in_val = 0
         for s in self.samples:
-            if s!=s_sample:
-                in_val=in_val+ distance_list[(s_sample, s)]
-        if len(self.samples)==1:
-                return 0
+            if s != s_sample:
+                in_val = in_val + distance_list[(s_sample, s)]
+        if len(self.samples) == 1:
+            return 0
         else:
             return in_val / (len(self.samples)-1)
-
 
     def print_details(self, silhouette):
         count = 0

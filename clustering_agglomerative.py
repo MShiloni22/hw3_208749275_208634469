@@ -1,6 +1,5 @@
-
 from cluster import Cluster
-from sample import Sample
+
 
 class AgglomerativeClustering:
     def __init__(self, link, samples):
@@ -12,7 +11,6 @@ class AgglomerativeClustering:
             self.clusters.append(Cluster(j, i))
             j = j+1
 
-
     def compute_silhoeutte(self, distance_list):
         silhoeutte_samples = {}
         out_val = []
@@ -20,69 +18,64 @@ class AgglomerativeClustering:
             for s in c.samples:
                 in_val = c.compute_in(s, distance_list)
                 for c1 in self.clusters:
-                    if c1!=c:
+                    if c1 != c:
                         out_val.append(c1.compute_in(s, distance_list))
                 out = min(out_val)
-                silhoeutte_samples[s.s_id] = round(out-in_val/max(out,in_val),3)
+                silhoeutte_samples[s.s_id] = round(out-in_val/max(out, in_val), 3)
                 out_val = []
         return silhoeutte_samples
 
-
-    def compute_summery_silhoeutte(self , distance_list):
+    def compute_summery_silhoeutte(self, distance_list):
         silhoeutte_dict = self.compute_silhoeutte(distance_list)
         summery_silhoeutte = {}
         for cluster in self.clusters:
             sum_sil = 0
             for sample in cluster.samples:
-                sum_sil = sum_sil +silhoeutte_dict[sample.s_id]
-                if len(cluster.samples)<=1:
-                    summery_silhoeutte[cluster.c_id]=0
+                sum_sil = sum_sil + silhoeutte_dict[sample.s_id]
+                if len(cluster.samples) <= 1:
+                    summery_silhoeutte[cluster.c_id] = 0
                 else:
-                    summery_silhoeutte[cluster.c_id] = round(sum_sil/len(cluster.samples),3)
+                    summery_silhoeutte[cluster.c_id] = round(sum_sil/len(cluster.samples), 3)
         summery_silhoeutte[0] = silhoeutte_dict
         return summery_silhoeutte
 
-
     def compute_rand_index(self):
-        tp=0
-        fp=0
+        tp = 0
+        fp = 0
         for c in self.clusters:
             for s1 in c.samples:
                 for s2 in c.samples:
-                    if(s1.s_id==s2.s_id):
+                    if s1.s_id == s2.s_id:
                         continue
-                    if (s1.lable == s2.lable):
+                    if s1.lable == s2.lable:
                         tp = tp+1
                     else:
                         fp = fp+1
-        tn=0
-        fn=0
+        tn = 0
+        fn = 0
         for c1 in self.clusters:
             for s1 in c1.samples:
                 for c2 in self.clusters:
-                    if(c1.c_id==c2.c_id):
+                    if c1.c_id == c2.c_id:
                         continue
                     for s2 in c2.samples:
-                    if(s1.lable == s2.lable)
-                        fn = fn+1
-                    else:
-                        tn = tn+1
+                        if s1.lable == s2.lable:
+                            fn = fn+1
+                        else:
+                            tn = tn+1
         ri = (tp+tn)/(tp+tn+fp+fn)
         return ri
 
-
-
-
     def run(self, max_clusters, distance_list):
-        while len(self.clusters)>max_clusters:
-            min= self.link.compute(self.clusters[0], self.clusters[1], distance_list)
-            list_names_clusters = [self.clusters[0],self.clusters[1]]
+        while len(self.clusters) > max_clusters:
+            min_distance = self.link.compute(self.clusters[0], self.clusters[1], distance_list)
+            list_names_clusters = [self.clusters[0], self.clusters[1]]
             for c1 in self.clusters:
                 for c2 in self.clusters:
-                    if (c1.c_id!=c2.c_id):
+                    if c1.c_id != c2.c_id:
                         distance = self.link.compute(c1, c2, distance_list)
-                        if (distance<min):
-                            min = distance
+                        if distance < min_distance:
+                            min_distance = distance
                             list_names_clusters[0] = c1
                             list_names_clusters[1] = c2
 
@@ -92,19 +85,4 @@ class AgglomerativeClustering:
         for i in self.clusters:
             i.print_details(final_clusters[i.c_id])
         total_silhoeutte = sum(final_clusters[0].values())/len(final_clusters[0])
-        print("Whole data: silhouette = ", total_silhoeutte,", RI = ", self.compute_rand_index)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        print("Whole data: silhouette = ", total_silhoeutte, ", RI = ", self.compute_rand_index)
