@@ -11,11 +11,9 @@ class AgglomerativeClustering:
         self.link = link
         self.samples = samples
         self.clusters = []
-        j = 1
         for i in samples:
             samples_list = [i]
-            self.clusters.append(Cluster(j, samples_list))
-            j = j+1
+            self.clusters.append(Cluster(i.s_id, samples_list))
 
     def compute_silhoeutte(self, distance_list):
         """
