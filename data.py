@@ -40,5 +40,7 @@ class Data:
         distance_matrix = {}
         for i in samples_list:
             for j in samples_list:
+                if i == j:
+                    continue
                 distance_matrix[(i.s_id, j.s_id)] = Sample.compute_euclidean_distance(i, j)
         return distance_matrix
