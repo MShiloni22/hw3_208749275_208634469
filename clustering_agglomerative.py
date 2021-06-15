@@ -70,7 +70,7 @@ class AgglomerativeClustering:
                 for s2 in c.samples:
                     if s1.s_id == s2.s_id:
                         continue
-                    if s1.lable == s2.lable:
+                    if s1.label == s2.label:
                         tp = tp+1
                     else:
                         fp = fp+1
@@ -82,7 +82,7 @@ class AgglomerativeClustering:
                     if c1.c_id == c2.c_id:
                         continue
                     for s2 in c2.samples:
-                        if s1.lable == s2.lable:
+                        if s1.label == s2.label:
                             fn = fn+1
                         else:
                             tn = tn+1
