@@ -117,5 +117,6 @@ class AgglomerativeClustering:
                 continue
             sum1 = sum1 + v
         length = len(final.values())
-        total_silhoeutte = sum1/length
-        print("Whole data: silhouette = ", round(total_silhoeutte, 3), ", RI = ", round(self.compute_rand_index(), 3))
+        total_silhoeutte = round(sum1, 3)/length
+        print("Whole data: silhouette = ", round(total_silhoeutte, 3), ", RI = ", round(self.compute_rand_index(), 3),
+              sep='')
