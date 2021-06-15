@@ -28,9 +28,9 @@ class Cluster:
         for s in self.samples:
             if s.s_id != s_sample.s_id:
                 in_val = in_val + distance_list[(s_sample.s_id, s.s_id)]
-        if len(self.samples) == 1:
-            return 0
         if s_sample in self.samples:
+            if len(self.samples) == 1:
+                return 0
             return in_val / (len(self.samples)-1)
         else:
             return in_val / (len(self.samples))
