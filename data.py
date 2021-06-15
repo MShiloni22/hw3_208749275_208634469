@@ -1,6 +1,5 @@
 import pandas
 import sample
-from sample import Sample
 
 
 # define Data class
