@@ -11,7 +11,7 @@ class AgglomerativeClustering:
         self.link = link
         self.samples = samples
         self.clusters = []
-        j = 0
+        j = 1
         for i in samples:
             samples_list = [i]
             self.clusters.append(Cluster(j, samples_list))
@@ -113,4 +113,4 @@ class AgglomerativeClustering:
         for i in self.clusters:
             i.print_details(final_clusters[i.c_id])
         total_silhoeutte = sum(final_clusters[0].values())/len(final_clusters[0])
-        print("Whole data: silhouette = ", total_silhoeutte, ", RI = ", self.compute_rand_index)
+        print("Whole data: silhouette = ", total_silhoeutte, ", RI = ", self.compute_rand_index())
