@@ -110,5 +110,10 @@ class AgglomerativeClustering:
         final_clusters = self.compute_summery_silhoeutte(distance_list)
         for i in self.clusters:
             i.print_details(final_clusters[i.c_id])
-        total_silhoeutte = sum(final_clusters[0].values())/len(final_clusters[0].keys())
+        summary = 0
+        counter = 0
+        for v in final_clusters[0].values():
+            summary += v
+            counter += 1
+        total_silhoeutte = summary/counter
         print("Whole data: silhouette = ", round(total_silhoeutte, 3), ", RI = ", round(self.compute_rand_index(), 3))
