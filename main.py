@@ -22,6 +22,5 @@ def main(argv):
     runner_complete.run(max_clusters, distance_list)
 
 
-
 if __name__ == '__main__':
     main(sys.argv)
