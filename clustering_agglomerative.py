@@ -34,7 +34,7 @@ class AgglomerativeClustering:
                 out = min(out_val)
                 out_val.clear()
                 if out == 0 and in_val == 0:
-                    silhoeutte_samples[s.s_id] = round(0, 1)
+                    silhoeutte_samples[s.s_id] = 0.0
                     continue
                 silhoeutte_samples[s.s_id] = round((out-in_val)/max(out, in_val), 3)
         return silhoeutte_samples
@@ -52,7 +52,7 @@ class AgglomerativeClustering:
             for sample in cluster.samples:
                 sum_sil = sum_sil + silhoeutte_dict[sample.s_id]
                 if len(cluster.samples) <= 1:
-                    summery_silhoeutte[cluster.c_id] = round(0, 1)
+                    summery_silhoeutte[cluster.c_id] = 0.0
                 else:
                     summery_silhoeutte[cluster.c_id] = round(sum_sil/len(cluster.samples), 3)
         summery_silhoeutte[0] = silhoeutte_dict
@@ -113,4 +113,4 @@ class AgglomerativeClustering:
         for i in self.clusters:
             i.print_details(final_clusters[i.c_id])
         total_silhoeutte = sum(final_clusters[0].values())/len(final_clusters[0])
-        print("Whole data: silhouette = ", total_silhoeutte, ", RI = ", self.compute_rand_index())
+        print("Whole data: silhouette = ", round(total_silhoeutte, 3), ", RI = ", round(self.compute_rand_index(), 3))
