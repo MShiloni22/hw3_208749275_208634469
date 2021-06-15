@@ -14,7 +14,7 @@ class Cluster:
         :param other: a second cluster to be merged with the current (self) cluster
         """
         self.c_id = min(self.c_id, other.c_id)
-        self.samples.append(other.samples)
+        self.samples.extend(other.samples)
         self.samples.sort(key=lambda x: x.s_id)
 
     def compute_in(self, s_sample, distance_list):
@@ -26,8 +26,8 @@ class Cluster:
         """
         in_val = 0
         for s in self.samples:
-            if s != s_sample:
-                in_val = in_val + distance_list[(s_sample, s)]
+            if s.s_id != s_sample.s_id:
+                in_val = in_val + distance_list[(s_sample.s_id, s.s_id)]
         if len(self.samples) == 1:
             return 0
         else:

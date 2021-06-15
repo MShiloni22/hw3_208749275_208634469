@@ -93,7 +93,6 @@ class AgglomerativeClustering:
         :param distance_list: a similarity matrix
         """
         while len(self.clusters) > max_clusters:
-            print(self.clusters[0])
             min_distance = self.link.compute(self.clusters[0], self.clusters[1], distance_list)
             list_names_clusters = [self.clusters[0], self.clusters[1]]
             for c1 in self.clusters:
