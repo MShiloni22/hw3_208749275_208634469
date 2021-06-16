@@ -13,12 +13,11 @@ class SingleLink(Link):
         :param distance_list: dictionary of all distances
         :return: the distance between the clusters, according to single link method
         """
-        minimum_distance = cluster.samples[0].compute_euclidean_distance(other.samples[0])
+        distance = []
         for point_from_cluster in cluster.samples:
             for point_from_other in other.samples:
-                distance = distance_list[(point_from_cluster.s_id, point_from_other.s_id)]
-                if distance < minimum_distance:
-                    minimum_distance = distance
+                distance.append(distance_list[(point_from_cluster.s_id, point_from_other.s_id)])
+        minimum_distance = min(distance)
         return minimum_distance
 
 
@@ -31,10 +30,9 @@ class CompleteLink(Link):
                 :param distance_list: dictionary of all distances
                 :return: the distance between the clusters, according to single link method
                 """
-        maximum_distance = cluster.samples[0].compute_euclidean_distance(other.samples[0])
+        distance = []
         for point_from_cluster in cluster.samples:
             for point_from_other in other.samples:
-                distance = distance_list[(point_from_cluster.s_id, point_from_other.s_id)]
-                if distance > maximum_distance:
-                    maximum_distance = distance
+                distance.append(distance_list[(point_from_cluster.s_id, point_from_other.s_id)])
+        maximum_distance = max(distance)
         return maximum_distance
