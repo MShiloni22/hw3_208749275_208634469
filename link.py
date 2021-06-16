@@ -1,6 +1,3 @@
-import sample
-
-
 class Link:
     def compute(self, cluster, other, distance_list):
         # Abstract method, defined by convention only

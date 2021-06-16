@@ -98,7 +98,7 @@ class AgglomerativeClustering:
             list_names_clusters = [self.clusters[0], self.clusters[1]]
             for c1 in self.clusters:
                 for c2 in self.clusters:
-                    if c1.c_id != c2.c_id:
+                    if c1.c_id < c2.c_id:
                         distance = self.link.compute(c1, c2, distance_list)
                         if distance < min_distance:
                             min_distance = distance
